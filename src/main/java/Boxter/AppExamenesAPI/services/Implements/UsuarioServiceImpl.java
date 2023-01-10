@@ -46,4 +46,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.deleteById(usuarioId);
     }
 
+    @Override
+    public Usuario finById(Long usuarioId) {
+        return usuarioRepository.findById(usuarioId).orElse(null);
+    }
+
+    @Override
+    public Usuario guardarImagen(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
 }

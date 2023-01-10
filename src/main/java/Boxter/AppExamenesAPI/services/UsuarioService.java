@@ -14,4 +14,8 @@ public interface UsuarioService {
 
     public void eliminarUsuario(Long usuarioId);
 
+    public Usuario finById(Long usuarioId);
+
+    public Usuario guardarImagen(Usuario usuario);
+
 }

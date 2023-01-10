@@ -29,7 +29,7 @@ public class AppExamenesApiApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		try {
+		/*try {
 			Usuario usuario = new Usuario();
 			usuario.setNombre("admin");
 			usuario.setApellido("admin");
@@ -53,6 +53,6 @@ public class AppExamenesApiApplication implements CommandLineRunner {
 			System.out.println(usuarioGuardado.getUsername());
 		}catch (UsuarioNotFoundException e){
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
