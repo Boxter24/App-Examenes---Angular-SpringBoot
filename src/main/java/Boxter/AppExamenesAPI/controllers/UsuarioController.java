@@ -27,7 +27,7 @@ import static org.springframework.http.HttpStatus.*;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping(path = "/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     private final Logger log = LoggerFactory.getLogger(UsuarioController.class);
@@ -35,29 +35,17 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
     @PostMapping("/")
     public Usuario guardarUsuario(@RequestBody Usuario usuario) throws Exception {
 
-        usuario.setPerfil("default.png");
+        return usuarioService.guardarUsuario(usuario);
+    }
 
-        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+    @PutMapping
+    public ResponseEntity<?> actualizarUsuario(@RequestBody Usuario usuario){
 
-        Set<UsuarioRol> usuarioRoles = new HashSet<>();
+        return usuarioService.actualizarUsuario(usuario);
 
-        Rol rol = new Rol();
-        rol.setRolId(2L);
-        rol.setRolNombre("NORMAL");
-
-        UsuarioRol usuarioRol = new UsuarioRol();
-        usuarioRol.setUsuario(usuario);
-        usuarioRol.setRol(rol);
-
-        usuarioRoles.add(usuarioRol);
-
-        return usuarioService.guardarUsuario(usuario,usuarioRoles);
     }
 
     @PostMapping("/imagen")
@@ -155,6 +143,11 @@ public class UsuarioController {
         headers.add(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + recurso.getFilename() + "\"");
 
         return new ResponseEntity<Resource>(recurso,headers, OK);
+    }
+
+    @GetMapping
+    public List<Usuario> listarUsuarios(){
+        return usuarioService.obtenerUsuarios();
     }
 
 }

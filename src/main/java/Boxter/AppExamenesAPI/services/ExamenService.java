@@ -2,6 +2,7 @@ package Boxter.AppExamenesAPI.services;
 
 import Boxter.AppExamenesAPI.entity.Categoria;
 import Boxter.AppExamenesAPI.entity.Examen;
+import Boxter.AppExamenesAPI.entity.Pregunta;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public interface ExamenService {
     Examen obtenerExamen(Long examenId);
 
     void eliminarExamen(Long examenId);
+
+    Long buscarNumeroDePreguntas(Long examenId);
 
 }

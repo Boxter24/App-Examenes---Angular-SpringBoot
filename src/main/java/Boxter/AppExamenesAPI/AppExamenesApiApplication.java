@@ -29,15 +29,14 @@ public class AppExamenesApiApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		//Crear Usuario Admin Al crear BBDD
 		/*try {
 			Usuario usuario = new Usuario();
-			usuario.setNombre("admin");
-			usuario.setApellido("admin");
+			usuario.setNombreCompleto("admin");
 			usuario.setUsername("admin");
 			usuario.setPassword(passwordEncoder.encode("admin12345"));
 			usuario.setEmail("admin@gmail.com");
 			usuario.setTelefono("");
-			usuario.setPerfil("admin.png");
 
 			Rol rol = new Rol();
 			rol.setRolId(1L);

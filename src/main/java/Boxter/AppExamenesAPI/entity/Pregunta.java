@@ -18,7 +18,6 @@ public class Pregunta {
     @Column(length = 5000)
     private String contenido;
 
-    private String imagen;
     private String opcion1;
     private String opcion2;
     private String opcion3;
@@ -30,6 +29,7 @@ public class Pregunta {
     private String respuesta;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "examen_id", referencedColumnName = "examenId")
     private Examen examen;
 
     public Pregunta(){}

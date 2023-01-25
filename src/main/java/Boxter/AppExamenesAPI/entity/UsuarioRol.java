@@ -1,7 +1,7 @@
 package Boxter.AppExamenesAPI.entity;
 
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class UsuarioRol {
 
     @Id
@@ -16,11 +17,11 @@ public class UsuarioRol {
     private Long usuarioRolId;
 
     @ManyToOne(fetch = FetchType.EAGER)
+
     private Usuario usuario;
 
     @ManyToOne
+
     private Rol rol;
-
-
 
 }

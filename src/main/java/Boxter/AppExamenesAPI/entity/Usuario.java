@@ -2,6 +2,7 @@ package Boxter.AppExamenesAPI.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,20 +27,28 @@ public class Usuario implements UserDetails, Serializable {
     @NotEmpty(message = "campo requerido")
     private String username;
     private String password;
-    private String nombre;
-    private String apellido;
+    private String nombreCompleto;
 
     @Email(message = "Debe ingresar un correo valido")
     @Column(nullable = false, unique = true)
     private String email;
     private String telefono;
     private boolean enabled = true;
-    private String perfil;
     private String foto;
+    @Transient
+    private UsuarioRol usuarioRol;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
     @JsonIgnore
     private Set<UsuarioRol> usuarioRoles = new HashSet<>();
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<ResultadoExamen> resultadoExamen;
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<IntentoExamen> intentoExamen;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -64,4 +74,5 @@ public class Usuario implements UserDetails, Serializable {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
 }

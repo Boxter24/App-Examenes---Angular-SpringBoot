@@ -2,6 +2,7 @@ package Boxter.AppExamenesAPI.services.Implements;
 
 import Boxter.AppExamenesAPI.entity.Categoria;
 import Boxter.AppExamenesAPI.entity.Examen;
+import Boxter.AppExamenesAPI.entity.Pregunta;
 import Boxter.AppExamenesAPI.repository.ExamenRepository;
 import Boxter.AppExamenesAPI.services.ExamenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class ExamenServiceImpl implements ExamenService {
             buscarExamen.setDescripcion(examen.getDescripcion());
             buscarExamen.setPuntosMaximos(examen.getPuntosMaximos());
             buscarExamen.setNumeroDePreguntas(examen.getNumeroDePreguntas());
+            buscarExamen.setIntentos(examen.getIntentos());
             buscarExamen.setActivo(examen.isActivo());
             buscarExamen.setCategoria(examen.getCategoria());
 
@@ -88,5 +90,10 @@ public class ExamenServiceImpl implements ExamenService {
     @Transactional
     public void eliminarExamen(Long examenId) {
         examenRepository.deleteById(examenId);
+    }
+
+    @Override
+    public Long buscarNumeroDePreguntas(Long examenId) {
+        return examenRepository.findNumeroDePreguntas(examenId);
     }
 }
